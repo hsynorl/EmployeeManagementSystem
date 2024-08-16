@@ -7,6 +7,7 @@ using EmployeeManagementSystem.Common.ViewModel;
 using EmployeeManagementSystem.DataAccess.Repositories.Abstract;
 using EmployeeManagementSystem.DataAccess.Repositories.Concrete;
 using EmployeeManagementSystem.Entities.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagementSystem.Business.Services.Concrete
 {
@@ -47,14 +48,35 @@ namespace EmployeeManagementSystem.Business.Services.Concrete
             return new ErrorResult("Kullanıcı silinemedi");
         }
 
-        public Task<IDataResult<List<UserViewModel>>> GetDepartmentUsers(GetDepartmentUsersQuery getDepartmentUsersQuery)
+        public async Task<IDataResult<List<UserViewModel>>> GetDepartmentUsers(GetDepartmentUsersQuery getDepartmentUsersQuery)
         {
-            throw new NotImplementedException();
+            var result = await userDepartmentRepository.AsQueryable()
+                .Include(p => p.User)
+                .Where(_ => true)
+                .AsNoTracking()
+                .ToListAsync();
+            if (result == null)
+            {
+                return new ErrorDataResult<List<UserViewModel>>("User bulunamadı");
+            }
+            var users = mapper.Map<List<UserViewModel>>(result);
+            return new SuccessDataResult<List<UserViewModel>>(users);
         }
 
-        public Task<IResult> UpdateUserDepartment(UpdateUserDepartmentCommand updateUserDepartmentCommand)
+        public async Task<IResult> UpdateUserDepartment(UpdateUserDepartmentCommand updateUserDepartmentCommand)
         {
-            throw new NotImplementedException();
+            var userDepartment = await userDepartmentRepository.GetSingleAsync(p => p.Id == updateUserDepartmentCommand.UserId);
+            if (userDepartment == null)
+            {
+                return new ErrorResult("User Department bulunamadı");
+            }
+            mapper.Map(updateUserDepartmentCommand, userDepartment);
+            var result = await userDepartmentRepository.UpdateAsync(userDepartment);
+            if (result > 0)
+            {
+                return new SuccessResult("User Department güncellendi");
+            }
+            return new ErrorResult("User Department güncellenemedi");
         }
     }
 }

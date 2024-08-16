@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagementSystem.Entities", "src\EmployeeManagementSystem.Entities\EmployeeManagementSystem.Entities.csproj", "{34966524-4450-40C9-9D04-F876BE8C7364}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementSystem.Entities", "src\EmployeeManagementSystem.Entities\EmployeeManagementSystem.Entities.csproj", "{34966524-4450-40C9-9D04-F876BE8C7364}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagementSystem.Business", "src\EmployeeManagementSystem.Business\EmployeeManagementSystem.Business.csproj", "{DA10B1D3-D4E5-4294-9118-A0AF9889D794}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementSystem.Business", "src\EmployeeManagementSystem.Business\EmployeeManagementSystem.Business.csproj", "{DA10B1D3-D4E5-4294-9118-A0AF9889D794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagementSystem.DataAccess", "src\EmployeeManagementSystem.DataAccess\EmployeeManagementSystem.DataAccess.csproj", "{E31F6A59-7AAE-4408-A954-E4E5ADCABD8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementSystem.DataAccess", "src\EmployeeManagementSystem.DataAccess\EmployeeManagementSystem.DataAccess.csproj", "{E31F6A59-7AAE-4408-A954-E4E5ADCABD8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagementSystem.WebApi", "src\EmployeeManagementSystem.WebApi\EmployeeManagementSystem.WebApi.csproj", "{634CB298-9DE1-4A09-AD6F-BA7355DA312F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementSystem.WebApi", "src\EmployeeManagementSystem.WebApi\EmployeeManagementSystem.WebApi.csproj", "{634CB298-9DE1-4A09-AD6F-BA7355DA312F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagementSystem.Client", "src\EmployeeManagementSystem.Client\EmployeeManagementSystem.Client.csproj", "{394B3C39-8413-4557-9AFC-857A0A751F84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementSystem.Client", "src\EmployeeManagementSystem.Client\EmployeeManagementSystem.Client.csproj", "{394B3C39-8413-4557-9AFC-857A0A751F84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagementSystem.Common", "src\EmployeeManagementSystem.Common\EmployeeManagementSystem.Common.csproj", "{42E6B94B-F61F-4B6B-9FE1-41D24FFC4C15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementSystem.Common", "src\EmployeeManagementSystem.Common\EmployeeManagementSystem.Common.csproj", "{42E6B94B-F61F-4B6B-9FE1-41D24FFC4C15}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{292C5A3B-1EEC-4BF4-969C-D6473B468E41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{42E6B94B-F61F-4B6B-9FE1-41D24FFC4C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42E6B94B-F61F-4B6B-9FE1-41D24FFC4C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42E6B94B-F61F-4B6B-9FE1-41D24FFC4C15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{292C5A3B-1EEC-4BF4-969C-D6473B468E41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{292C5A3B-1EEC-4BF4-969C-D6473B468E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{292C5A3B-1EEC-4BF4-969C-D6473B468E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{292C5A3B-1EEC-4BF4-969C-D6473B468E41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,18 +9,16 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using EmployeeManagementSystem.Entities.Entities;
 using Microsoft.Extensions.Configuration;
+using EmployeeManagementSystem.Common.Enums;
 
 namespace EmployeeManagementSystem.DataAccess.Context
 {
     public class EmployeeManagementSystemDbContext : DbContext
     {
-        IConfiguration configuration;
-        public EmployeeManagementSystemDbContext()
+        public EmployeeManagementSystemDbContext(DbContextOptions<EmployeeManagementSystemDbContext> options)
+          : base(options)
         {
             Database.Migrate();
-        }
-        public EmployeeManagementSystemDbContext(DbContextOptions contextOptions) : base(contextOptions)
-        {
         }
 
 
@@ -28,18 +26,23 @@ namespace EmployeeManagementSystem.DataAccess.Context
         public DbSet<UserDepartment> UserDepartments{ get; set; }
         public DbSet<User> Users { get; set; }
    
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                var connectionString = configuration.GetConnectionString("sqlServer");
-                optionsBuilder.UseSqlServer(connectionString);
-            }
-        }
-
+      
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<User>().HasData(new User()
+            {
+                EmailAddress = "admin@gmail.com",
+                FirstName = "Hüseyin",
+                LastName = "ORAL",
+                Password = "admin",
+                UserType = UserType.Admin,
+                PhoneNumber = "05360596086",
+                Id = Guid.NewGuid(),
+
+            });
+
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             modelBuilder.Entity<User>()
                 .HasOne(u => u.UserDepartment)

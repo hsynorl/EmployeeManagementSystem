@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  employeemanagementsystem.webapi:
+    image: ${DOCKER_REGISTRY-}employeemanagementsystemwebapi
+    build:
+      context: .
+      dockerfile: src/EmployeeManagementSystem.WebApi/Dockerfile
