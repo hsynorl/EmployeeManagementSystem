@@ -1,0 +1,49 @@
+﻿@model EmployeeManagementSystem.Common.Command.CreateUserDepartmentCommand
+
+@{
+    ViewData["Title"] = "View";
+}
+<div class="page-title">Seçilen Departmana Kullanıcı Ekle</div>
+<hr />
+<div class="row">
+    <div class="col-lg-12 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                @if (Model !=null)
+                {
+                    <form asp-action="CreateUserDepartment">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="UserId" class="control-label">Kullanıcı Adı</label>
+                            <select asp-for="UserId" class="form-control" asp-items="ViewBag.Users"></select>
+                            <span asp-validation-for="UserId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DepartmentId" class="control-label">Departman Adı</label>
+                            <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.Departments"></select>
+                            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2 d-flex justify-content-between">
+                            <input type="submit" value="Kullanıcıyı Departmana Ekle" class="btn btn-primary" />
+                            <div>
+                                <button class="btn btn-primary" onclick="location.href='@Url.Action("GetDepartments", "Department")'">Geri Dön</button>
+                            </div>
+                        </div>
+                    </form>
+                }else
+                {
+                    <div class="alert alert-danger">
+                        Kayıtlı kullanıcı veya departman bulunamadı.
+                    </div>
+                }
+
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

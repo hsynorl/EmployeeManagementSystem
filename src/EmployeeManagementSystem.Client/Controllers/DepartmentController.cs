@@ -19,14 +19,13 @@ namespace EmployeeManagementSystem.Client.Controllers
         }
         public async Task<ActionResult> GetDepartments()
         {
-            List<DepartmentViewModel> departmentViewModels = new();
             var result = await departmentService.GetDepartments();
             if (result != null)
             {
                 return View(result.Result);
 
             }
-            return View(departmentViewModels);
+            return View(null);
 
         }
         public async Task<ActionResult> DepartmentDetail(DepartmentViewModel departmentViewModel)
@@ -36,6 +35,19 @@ namespace EmployeeManagementSystem.Client.Controllers
         public async Task<ActionResult> CreateDepartment(CreateDepartmentCommand createDepartmentCommand)
         {
             var result = await departmentService.CreateDepartment(createDepartmentCommand);
+            if (result != null)
+            {
+                return RedirectToAction("GetDepartments", "Department");
+
+            }
+            return RedirectToAction("GetDepartments", "Department");
+
+        }
+
+
+        public async Task<ActionResult> DeleteDepartment(Guid departmentId)
+        {
+            var result = await departmentService.DeleteDepartment(departmentId);
             if (result != null)
             {
                 return RedirectToAction("GetDepartments", "Department");

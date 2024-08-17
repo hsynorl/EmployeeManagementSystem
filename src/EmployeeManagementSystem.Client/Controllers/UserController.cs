@@ -26,7 +26,7 @@ namespace EmployeeManagementSystem.Client.Controllers
             return View(result.Result);  
 
             }
-            return RedirectToAction("Index", "Home");
+            return View(null);
 
         }
         public async Task<ActionResult> UserDetail(UserViewModel userViewModel)
@@ -66,6 +66,17 @@ namespace EmployeeManagementSystem.Client.Controllers
             return View();
 
         }
+        public async Task<ActionResult> DeleteUser(Guid userId)
+        {
+            var result=await userService.DeleteUser(userId);
+            if (result != null)
+            {
+                return RedirectToAction("GetUsers", "User");
+
+            }
+            return RedirectToAction("GetUsers", "User");
+
+        }
         public async Task<IActionResult> Logout()
         {
             // Kullanıcının mevcut session'undan çıkış yap
@@ -84,10 +95,9 @@ namespace EmployeeManagementSystem.Client.Controllers
                     return RedirectToAction("Login");
                 }
                 var claims = new List<Claim>
-        {
-            
-            new Claim("Token", result.Result.Token) // Token'ı bir claim olarak ekliyoruz
-        };
+                {
+                     new Claim("Token", result.Result.Token) // Token'ı bir claim olarak ekliyoruz
+                };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var authProperties = new AuthenticationProperties

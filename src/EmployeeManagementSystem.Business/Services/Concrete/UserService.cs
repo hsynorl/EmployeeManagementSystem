@@ -6,6 +6,7 @@ using EmployeeManagementSystem.Common.Enums;
 using EmployeeManagementSystem.Common.Results;
 using EmployeeManagementSystem.Common.ViewModel;
 using EmployeeManagementSystem.DataAccess.Repositories.Abstract;
+using EmployeeManagementSystem.DataAccess.Repositories.Concrete;
 using EmployeeManagementSystem.Entities.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -37,6 +38,12 @@ namespace EmployeeManagementSystem.Business.Services.Concrete
 
         public async Task<IResult> CreateUser(CreateUserCommand createUserCommand)
         {
+            var isExistUser = await userRepository.GetSingleAsync(p => p.EmailAddress == createUserCommand.EmailAddress || p.PhoneNumber==createUserCommand.PhoneNumber);
+            if (isExistUser != null)
+            {
+                return new ErrorResult("Aynı mail adresine yada telefon numarasına ait kullanıcı var");
+
+            }
             var user = mapper.Map<User>(createUserCommand);
             var result=await  userRepository.AddAsync(user);
             if (result>0)
@@ -93,12 +100,12 @@ namespace EmployeeManagementSystem.Business.Services.Concrete
         {
             var claims = new[]
             {
-        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-        new Claim(ClaimTypes.Email, user.EmailAddress),
-        new Claim(ClaimTypes.GivenName, user.FirstName),
-        new Claim(ClaimTypes.Surname, user.LastName),
-        new Claim(ClaimTypes.Role, user.UserType.ToString())
-    };
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.EmailAddress),
+                new Claim(ClaimTypes.GivenName, user.FirstName),
+                new Claim(ClaimTypes.Surname, user.LastName),
+                new Claim(ClaimTypes.Role, user.UserType.ToString())
+            };
 
             var token = GenerateToken(claims);
 

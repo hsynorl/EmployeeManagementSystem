@@ -15,9 +15,20 @@ namespace EmployeeManagementSystem.Client.Services.Concrete
             this.httpClient = httpClient;
         }
 
-        public Task<Common.Results.IResult> CreateUserDepartment(CreateUserDepartmentCommand createUserDepartmentCommand)
+        public async Task<Common.Results.IResult> CreateUserDepartment(CreateUserDepartmentCommand createUserDepartmentCommand)
         {
-            throw new NotImplementedException();
+            var response = await httpClient.PostAsJsonAsync("userdepartments/create-userdepartment", createUserDepartmentCommand);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var createUserDepartmentResponse = await response.Content.ReadFromJsonAsync<Common.Results.Result>();
+
+                if (createUserDepartmentResponse.Success)
+                {
+                    return createUserDepartmentResponse;
+                }
+            }
+            return null;
         }
 
         public Task<Common.Results.IResult> DeleteUserDepartment(DeleteUserDepartmentCommand deleteUserDepartmentCommand)

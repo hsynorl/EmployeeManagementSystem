@@ -22,6 +22,12 @@ namespace EmployeeManagementSystem.Business.Services.Concrete
 
         public async Task<IResult> CreateDepartment(CreateDepartmentCommand createDepartmentCommand)
         {
+            var isExistDepartment=await departmentRepository.GetSingleAsync(p=>p.Name==createDepartmentCommand.Name);   
+            if (isExistDepartment != null)
+            {
+                return new ErrorResult("Aynı isime sahip bir departman var");
+
+            }
             var department = mapper.Map<Department>(createDepartmentCommand);
             var result = await departmentRepository.AddAsync(department);
             if (result > 0)
@@ -60,6 +66,12 @@ namespace EmployeeManagementSystem.Business.Services.Concrete
 
         public async Task<IResult> UpdateDepartment(UpdateDepartmentCommand updateDepartmentCommand)
         {
+            var isExistDepartment = await departmentRepository.GetSingleAsync(p => p.Name == updateDepartmentCommand.Name);
+            if (isExistDepartment != null)
+            {
+                return new ErrorResult("Aynı isime sahip bir departman var");
+            }
+
             var department = await departmentRepository.GetSingleAsync(p => p.Id == updateDepartmentCommand.DepartmentId);
             if (department == null)
             {

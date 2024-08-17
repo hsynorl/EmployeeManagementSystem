@@ -5,10 +5,12 @@
 }
 
 
-<h4>UpdateDepartmentCommand</h4>
+<div class="page-title">Departman Güncelle</div>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-12 col-md-6">
+        <div class="card">
+            <div class="card-body">
         <form asp-action="UpdateDepartment">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="DepartmentId" type="hidden" />
@@ -18,16 +20,19 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="UpdateDepartment" class="btn btn-primary" />
-            </div>
+                    <div class="form-group mt-2 d-flex justify-content-between ">
+                        <input type="submit" value="Departmanı Güncelle" class="btn btn-primary" />
+                        <div>
+                            <button class="btn btn-primary" onclick="location.href='@Url.Action("GetDepartments", "Department")'">Geri Dön</button>
+                        </div>
+                    </div>
         </form>
+    </div>
+    </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="GetDepartments">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

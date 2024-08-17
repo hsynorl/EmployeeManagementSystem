@@ -20,6 +20,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+                    @if (Model != null)
+                        {
                 <table class="table">
                     <thead>
                         <tr>
@@ -30,8 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model != null)
-                        {
+                    
 
                             @foreach (var item in Model)
                             {
@@ -43,26 +44,62 @@
                                         <a href="@Url.Action("DepartmentDetail","Department",item)"class="btn btn-sm text-secondary">
                                             <i class="fa fa-edit"></i> 
                                         </a>
-                                        <a class="text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        <a class="text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" data-departmentid="@item.DepartmentId">
                                             <i class="fa fa-trash" ></i> 
                                         </a>
                                     </td>
                                 </tr>
                             }
-                        }
-                        else
-                        {
-                            <span>Department bulunamadı</span>
-                        }
+                        
+                       
                     </tbody>
                 </table>
+                }
+                else
+                        {
+                    <div class="alert alert-danger">
+                        Department bulunamadı.
+                    </div>
+                        }
             </div>
         </div>
 
     </div>
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-3 shadow">
+            <div class="modal-body p-4 text-center">
+                <h5 class="mb-0">Departman silinsin mi?</h5>
+                <p class="mb-0">Seçilen departmanı silmek istediğinize emin misiniz?</p>
+            </div>
+            <div class="modal-footer flex-nowrap p-0">
+                <form method="post" action="Department/DeleteDepartment" class="d-flex justify-content-between" id="deleteForm">
+                    <input type="hidden" id="deleteDepartmentId" name="departmentId" />
+                    <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Sil</strong></button>
+                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">İptal Et</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Butona tıklama olayını tetikleyen buton
+            var departmentId = button.data('departmentid'); // Butonun data-userid attribute'undan UserId'yi al
+            var modal = $(this);
+            modal.find('#deleteDepartmentId').val(departmentId); // UserId'yi modal içindeki gizli input'a set et
+        });
+    });
+</script>
 
+
+
+
+
+@* 
 <div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content rounded-3 shadow">
@@ -77,7 +114,7 @@
         </div>
     </div>
 </div>
-
+ *@
 
 
 
