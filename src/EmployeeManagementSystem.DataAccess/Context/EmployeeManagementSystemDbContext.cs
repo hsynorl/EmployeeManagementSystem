@@ -40,6 +40,7 @@ namespace EmployeeManagementSystem.DataAccess.Context
                 UserType = UserType.Admin,
                 PhoneNumber = "05360596086",
                 Id = Guid.NewGuid(),
+                CreatedDate = DateTime.Now,
 
             });
 
@@ -50,6 +51,65 @@ namespace EmployeeManagementSystem.DataAccess.Context
                 .HasForeignKey<UserDepartment>(du => du.Id);
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        public override int SaveChanges()
+        {
+            OnBeforeForUpdateSave();
+            OnBeforeSave();
+            return base.SaveChanges();
+        }
+
+        public override int SaveChanges(bool acceptAllChangesOnSuccess)
+        {
+            OnBeforeForUpdateSave();
+            OnBeforeSave();
+            return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        {
+            OnBeforeForUpdateSave();
+            OnBeforeSave();
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            OnBeforeForUpdateSave();
+            OnBeforeSave();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+        private void OnBeforeSave()
+        {
+            var addedEntites = ChangeTracker.Entries()
+                                    .Where(i => i.State == EntityState.Added)
+                                    .Select(i => (BaseEntity)i.Entity);
+
+            PrepareAddedEntities(addedEntites);
+        }
+        private void PrepareAddedEntities(IEnumerable<BaseEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                if (entity.CreatedDate == DateTime.MinValue)
+                    entity.CreatedDate = DateTime.Now;
+            }
+        }
+        private void OnBeforeForUpdateSave()
+        {
+            var updatedEntites = ChangeTracker.Entries()
+                                    .Where(i => i.State == EntityState.Modified)
+                                    .Select(i => (BaseEntity)i.Entity);
+
+            PrepareUpdateEntities(updatedEntites);
+        }
+        private void PrepareUpdateEntities(IEnumerable<BaseEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                if (entity.UpdatedDate == DateTime.MinValue)
+                    entity.UpdatedDate = DateTime.Now;
+            }
         }
     }
 }

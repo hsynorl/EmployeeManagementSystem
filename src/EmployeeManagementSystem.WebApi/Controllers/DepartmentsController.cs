@@ -22,15 +22,7 @@ namespace EmployeeManagementSystem.WebApi.Controllers
             var result=await departmentsService.GetDepartments();
             return Ok(result);
         }
-        [HttpGet("get-departments-by-user-id")]
-        public async Task<IActionResult> GetUserDepartmentByUserId([FromQuery]Guid userId)
-        {
-            var result = await departmentsService.GetUserDepartmentByUserId(new()
-            {
-                UserId=userId   
-            });
-            return Ok(result);
-        }
+       
         [HttpPost("create-department")]
         public async Task<IActionResult> CreateDepartment(CreateDepartmentCommand createDepartmentCommand)
         {

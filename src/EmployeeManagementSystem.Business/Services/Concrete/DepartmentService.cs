@@ -50,24 +50,12 @@ namespace EmployeeManagementSystem.Business.Services.Concrete
         public async Task<IDataResult<List<DepartmentViewModel>>> GetDepartments()
         {
             var result = await departmentRepository.GetAll();
-            if (result == null)
+            if (result.Count<1)
             {
                 return new ErrorDataResult<List<DepartmentViewModel>>("Department bulunamadı");
             }
             var departments = mapper.Map<List<DepartmentViewModel>>(result);
             return new SuccessDataResult<List<DepartmentViewModel>>(departments);
-        }
-
-        public async Task<IDataResult<DepartmentViewModel>> GetUserDepartmentByUserId(GetUserDepartmentQuery getUserDepartmentQuery)
-        {
-           var result=await departmentRepository.GetList(p=>p.Id==getUserDepartmentQuery.UserId);
-            if (result == null)
-            {
-                return new ErrorDataResult<DepartmentViewModel>("Department bulunamadı");
-            }
-            var department=mapper.Map<DepartmentViewModel>(result);
-           
-            return new SuccessDataResult<DepartmentViewModel>(department);
         }
 
         public async Task<IResult> UpdateDepartment(UpdateDepartmentCommand updateDepartmentCommand)

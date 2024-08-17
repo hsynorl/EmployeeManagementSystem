@@ -24,6 +24,7 @@ namespace EmployeeManagementSystem.Business.Services.Concrete
         public async Task<IResult> CreateUserDepartment(CreateUserDepartmentCommand createUserDepartmentCommand)
         {
             var userDepartment = mapper.Map<UserDepartment>(createUserDepartmentCommand);
+            userDepartment.User = null;
             var result = await userDepartmentRepository.AddAsync(userDepartment);
             if (result > 0)
             {
@@ -48,6 +49,18 @@ namespace EmployeeManagementSystem.Business.Services.Concrete
             return new ErrorResult("Kullanıcı silinemedi");
         }
 
+        public async Task<IDataResult<DepartmentViewModel>> GetUserDepartmentByUserId(GetUserDepartmentQuery getUserDepartmentQuery)
+        {
+            var result = await userDepartmentRepository.AsQueryable().Include(p=>p.Department).FirstOrDefaultAsync(p => p.Id == getUserDepartmentQuery.UserId);
+            if (result == null)
+            {
+                return new ErrorDataResult<DepartmentViewModel>("Department bulunamadı");
+            }
+            var department = mapper.Map<DepartmentViewModel>(result.Department);
+
+            return new SuccessDataResult<DepartmentViewModel>(department);
+        }
+
         public async Task<IDataResult<List<UserViewModel>>> GetDepartmentUsers(GetDepartmentUsersQuery getDepartmentUsersQuery)
         {
             var result = await userDepartmentRepository.AsQueryable()
@@ -55,11 +68,11 @@ namespace EmployeeManagementSystem.Business.Services.Concrete
                 .Where(_ => true)
                 .AsNoTracking()
                 .ToListAsync();
-            if (result == null)
+            if (result.Count < 1)
             {
                 return new ErrorDataResult<List<UserViewModel>>("User bulunamadı");
             }
-            var users = mapper.Map<List<UserViewModel>>(result);
+            var users = mapper.Map<List<UserViewModel>>(result.Select(p=>p.User));
             return new SuccessDataResult<List<UserViewModel>>(users);
         }
 

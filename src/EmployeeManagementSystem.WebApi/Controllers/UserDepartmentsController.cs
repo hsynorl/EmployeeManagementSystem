@@ -1,4 +1,5 @@
 ﻿using EmployeeManagementSystem.Business.Services.Abstract;
+using EmployeeManagementSystem.Business.Services.Concrete;
 using EmployeeManagementSystem.Common.Command;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +25,15 @@ namespace EmployeeManagementSystem.WebApi.Controllers
             });
             return Ok(result);
         }
-
+        [HttpGet("get-departments-by-user-id")]
+        public async Task<IActionResult> GetUserDepartmentByUserId([FromQuery] Guid userId)
+        {
+            var result = await userDepartmentService.GetUserDepartmentByUserId(new()
+            {
+                UserId = userId
+            });
+            return Ok(result);
+        }
         [HttpPost("create-userdepartment")]
         public async Task<IActionResult> CreateUserDepartment(CreateUserDepartmentCommand createUserDepartmentCommand)
         {

@@ -54,7 +54,7 @@ namespace EmployeeManagementSystem.Business.Services.Concrete
         public async Task<IDataResult<List<UserViewModel>>> GetUsers()
         {
             var result = await userRepository.GetList(p => p.UserType == UserType.User);
-            if (result == null)
+            if (result.Count < 1)
             {
                 return new ErrorDataResult<List<UserViewModel>>("Kullanıcı bulunamadı");
             }

@@ -14,7 +14,9 @@ namespace EmployeeManagementSystem.Business.Mapping
     public class UserProfile:Profile
     {
         public UserProfile() {
-            CreateMap<User, UserViewModel>().ReverseMap();
+            CreateMap<User, UserViewModel>()
+                .ForMember(p=>p.UserId,y=>y.MapFrom(z=>z.Id))
+                .ReverseMap();
             CreateMap<CreateUserCommand,User >()
                 .ForMember(p=>p.UserType,y=>y.MapFrom(z=>UserType.User))
                 .ReverseMap();

@@ -11,6 +11,5 @@ namespace EmployeeManagementSystem.Business.Services.Abstract
         Task<IResult> UpdateDepartment(UpdateDepartmentCommand updateDepartmentCommand);
         Task<IResult> DeleteDepartment(DeleteDepartmentCommand deleteDepartmentCommand);
         Task<IDataResult<List<DepartmentViewModel>>> GetDepartments();
-        Task<IDataResult<DepartmentViewModel>> GetUserDepartmentByUserId(GetUserDepartmentQuery getUserDepartmentQuery);
     }
 }

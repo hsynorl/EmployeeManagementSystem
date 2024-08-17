@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeManagementSystem.DataAccess.Migrations
 {
     [DbContext(typeof(EmployeeManagementSystemDbContext))]
-    [Migration("20240816204018_mig_init")]
+    [Migration("20240817061512_mig_init")]
     partial class mig_init
     {
         /// <inheritdoc />
@@ -31,14 +31,14 @@ namespace EmployeeManagementSystem.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreateDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDate")
+                    b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -52,7 +52,7 @@ namespace EmployeeManagementSystem.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreateDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EmailAddress")
@@ -75,7 +75,7 @@ namespace EmployeeManagementSystem.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDate")
+                    b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserType")
@@ -84,6 +84,20 @@ namespace EmployeeManagementSystem.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("1cb2565e-6350-4c9b-9eb5-098079aa4f11"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmailAddress = "admin@gmail.com",
+                            FirstName = "Hüseyin",
+                            LastName = "ORAL",
+                            Password = "admin",
+                            PhoneNumber = "05360596086",
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserType = 0
+                        });
                 });
 
             modelBuilder.Entity("EmployeeManagementSystem.Entities.Entities.UserDepartment", b =>
@@ -91,13 +105,13 @@ namespace EmployeeManagementSystem.DataAccess.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreateDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("UpdateDate")
+                    b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
