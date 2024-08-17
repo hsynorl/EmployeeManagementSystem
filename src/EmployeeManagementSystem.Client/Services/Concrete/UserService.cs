@@ -22,7 +22,7 @@ namespace EmployeeManagementSystem.Client.Services.Concrete
 
             if (response.IsSuccessStatusCode)
             {
-                var createUserResponse = await response.Content.ReadFromJsonAsync<Common.Results.IResult>();
+                var createUserResponse = await response.Content.ReadFromJsonAsync<Common.Results.Result>();
 
                 if (createUserResponse.Success)
                 {
@@ -32,14 +32,25 @@ namespace EmployeeManagementSystem.Client.Services.Concrete
             return null;
         }
 
-        public Task<Common.Results.IResult> DeleteUser(DeleteUserCommand deleteUserCommand)
+        public async Task<Common.Results.IResult> DeleteUser(Guid userId )
         {
-            throw new NotImplementedException();
+            var response = await httpClient.DeleteAsync($"users/delete-user?userId={userId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var deleteResponse = await response.Content.ReadFromJsonAsync<Common.Results.Result>();
+
+                if (deleteResponse.Success)
+                {
+                    return deleteResponse;
+                }
+            }
+            return null;
         }
 
         public async Task<IDataResult<List<UserViewModel>>> GetUsers()
         {
-            var response = await httpClient.GetFromJsonAsync<SuccessDataResult<List<UserViewModel>>>("Users/get-users");
+            var response = await httpClient.GetFromJsonAsync<DataResult<List<UserViewModel>>>("Users/get-users");
             return response;
             
         }
@@ -50,7 +61,7 @@ namespace EmployeeManagementSystem.Client.Services.Concrete
 
             if (response.IsSuccessStatusCode)
             {
-                var loginViewModel = await response.Content.ReadFromJsonAsync<IDataResult<LoginViewModel>>();
+                var loginViewModel = await response.Content.ReadFromJsonAsync<DataResult<LoginViewModel>>();
 
                 if (loginViewModel.Success)
                 {
@@ -60,9 +71,20 @@ namespace EmployeeManagementSystem.Client.Services.Concrete
             return null;
         }
 
-        public Task<Common.Results.IResult> UpdateUser(UpdateUserCommand updateUserCommand)
+        public async Task<Common.Results.IResult> UpdateUser(UpdateUserCommand updateUserCommand)
         {
-            throw new NotImplementedException();
+            var response = await httpClient.PutAsJsonAsync("Users/update-user", updateUserCommand);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var updateResponse = await response.Content.ReadFromJsonAsync<Common.Results.Result>();
+
+                if (updateResponse.Success)
+                {
+                    return updateResponse;
+                }
+            }
+            return null;
         }
     }
 }

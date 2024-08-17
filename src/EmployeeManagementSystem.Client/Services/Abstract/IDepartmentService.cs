@@ -8,7 +8,7 @@ namespace EmployeeManagementSystem.Client.Services.Abstract
     {
         Task<Common.Results.IResult> CreateDepartment(CreateDepartmentCommand createDepartmentCommand);
         Task<Common.Results.IResult> UpdateDepartment(UpdateDepartmentCommand updateDepartmentCommand);
-        Task<Common.Results.IResult> DeleteDepartment(DeleteDepartmentCommand deleteDepartmentCommand);
+        Task<Common.Results.IResult> DeleteDepartment(Guid departmentId);
         Task<IDataResult<List<DepartmentViewModel>>> GetDepartments();
     }
 }

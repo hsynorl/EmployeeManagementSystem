@@ -14,24 +14,58 @@ namespace EmployeeManagementSystem.Client.Services.Concrete
             this.httpClient = httpClient;
         }
 
-        public Task<Common.Results.IResult> CreateDepartment(CreateDepartmentCommand createDepartmentCommand)
+        public async Task<Common.Results.IResult> CreateDepartment(CreateDepartmentCommand createDepartmentCommand)
         {
-            throw new NotImplementedException();
+            var response = await httpClient.PostAsJsonAsync("departments/create-department", createDepartmentCommand);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var createDepartmentResponse = await response.Content.ReadFromJsonAsync<Common.Results.Result>();
+
+                if (createDepartmentResponse.Success)
+                {
+                    return createDepartmentResponse;
+                }
+            }
+            return null;
         }
 
-        public Task<Common.Results.IResult> DeleteDepartment(DeleteDepartmentCommand deleteDepartmentCommand)
+        public async Task<Common.Results.IResult> DeleteDepartment(Guid departmentId)
         {
-            throw new NotImplementedException();
+            var response = await httpClient.DeleteAsync($"departments/delete-department?departmentId={departmentId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var deleteDepartmentResponse = await response.Content.ReadFromJsonAsync<Common.Results.Result>();
+
+                if (deleteDepartmentResponse.Success)
+                {
+                    return deleteDepartmentResponse;
+                }
+            }
+            return null;
         }
 
-        public Task<IDataResult<List<DepartmentViewModel>>> GetDepartments()
+        public async Task<IDataResult<List<DepartmentViewModel>>> GetDepartments()
         {
-            throw new NotImplementedException();
+            var response = await httpClient.GetFromJsonAsync<DataResult<List<DepartmentViewModel>>>("Departments/get-departments");
+            return response;
         }
 
-        public Task<Common.Results.IResult> UpdateDepartment(UpdateDepartmentCommand updateDepartmentCommand)
+        public async Task<Common.Results.IResult> UpdateDepartment(UpdateDepartmentCommand updateDepartmentCommand)
         {
-            throw new NotImplementedException();
+            var response = await httpClient.PutAsJsonAsync("departments/update-department", updateDepartmentCommand);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var updateDepartmentResponse = await response.Content.ReadFromJsonAsync<Common.Results.Result>();
+
+                if (updateDepartmentResponse.Success)
+                {
+                    return updateDepartmentResponse;
+                }
+            }
+            return null;
         }
     }
 }

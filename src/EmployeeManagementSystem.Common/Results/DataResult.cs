@@ -5,6 +5,8 @@ namespace EmployeeManagementSystem.Common.Results
 {
     public class DataResult<T> : Result, IDataResult<T>
     {
+        [JsonConstructor]
+
         public DataResult(T result, bool success, string message) : base(success, message)
         {
             Result = result;

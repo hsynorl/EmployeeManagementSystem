@@ -1,7 +1,10 @@
-﻿namespace EmployeeManagementSystem.Common.Results
+﻿using System.Text.Json.Serialization;
+
+namespace EmployeeManagementSystem.Common.Results
 {
     public class Result : IResult
     {
+        [JsonConstructor]
         public Result(bool success,string message):this(success)
         {
             Message=message;
@@ -11,8 +14,8 @@
             Success = success;
         }
 
-        public bool Success { get; }
+        public bool Success { get; set; }
 
-        public string Message { get; }
+        public string Message { get; set; }
     }
 }
