@@ -52,11 +52,15 @@ namespace EmployeeManagementSystem.Client.Controllers
             var result = await userDepartmentService.CreateUserDepartment(createUserDepartmentCommand);
             if (result != null)
             {
-                return RedirectToAction("NewUserDepartment", "UserDepartment");
-
+                TempData["ToastMessage"] = result.Message;
+                TempData["IsError"] = false;
             }
-            return RedirectToAction("GetDepartments", "Department");
-
+            else
+            {
+                TempData["ToastMessage"] = "Departmana kullanıcı ekleme işlemi başarısız.";
+                TempData["IsError"] = true;
+            }
+            return RedirectToAction("NewUserDepartment", "UserDepartment");
         }
     }
 }

@@ -39,10 +39,16 @@ namespace EmployeeManagementSystem.Client.Controllers
             var result = await userService.UpdateUser(updateUserCommand);
             if (result != null)
             {
-                return RedirectToAction("GetUsers", "User");
-
+                TempData["ToastMessage"] = result.Message;
+                TempData["IsError"] = false;
             }
-            return RedirectToAction("Index", "Home");
+            else
+            {
+                TempData["ToastMessage"] = "Kullanıcı güncelleme işlemi başarısız.";
+                TempData["IsError"] = true;
+            }
+            return RedirectToAction("GetUsers", "User");
+           
 
         }
         public async Task<ActionResult> CreateUser(CreateUserCommand createUserCommand)
@@ -50,10 +56,15 @@ namespace EmployeeManagementSystem.Client.Controllers
             var result = await userService.CreateUser(createUserCommand);
             if (result != null)
             {
-                return RedirectToAction("GetUsers", "User");
-
+                TempData["ToastMessage"] = result.Message;
+                TempData["IsError"] = false;
             }
-            return RedirectToAction("Index", "Home");
+            else
+            {
+                TempData["ToastMessage"] = "Kullanıcı ekleme işlemi başarısız.";
+                TempData["IsError"] = true;
+            }
+            return RedirectToAction("GetUsers", "User");
 
         }
         public async Task<ActionResult> NewUser()
@@ -71,8 +82,13 @@ namespace EmployeeManagementSystem.Client.Controllers
             var result=await userService.DeleteUser(userId);
             if (result != null)
             {
-                return RedirectToAction("GetUsers", "User");
-
+                TempData["ToastMessage"] = result.Message;
+                TempData["IsError"] = false;
+            }
+            else
+            {
+                TempData["ToastMessage"] = "Kullanıcı silme işlemi başarısız.";
+                TempData["IsError"] = true;
             }
             return RedirectToAction("GetUsers", "User");
 

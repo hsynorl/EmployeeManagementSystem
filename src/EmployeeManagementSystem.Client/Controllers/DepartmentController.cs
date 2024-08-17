@@ -38,13 +38,14 @@ namespace EmployeeManagementSystem.Client.Controllers
             var result = await departmentService.CreateDepartment(createDepartmentCommand);
             if (result != null)
             {
-                ViewBag.ToastMessage = result.Message;
-                ViewBag.IsError = false;
-                return RedirectToAction("GetDepartments", "Department");
-
+                TempData["ToastMessage"] = result.Message;
+                TempData["IsError"] = false;
             }
-            ViewBag.ToastMessage = result.Message;
-            ViewBag.IsError = true;
+            else
+            {
+                TempData["ToastMessage"] = "Departman ekleme işlemi başarısız.";
+                TempData["IsError"] = true;
+            }
             return RedirectToAction("GetDepartments", "Department");
 
         }
@@ -60,10 +61,10 @@ namespace EmployeeManagementSystem.Client.Controllers
             }
             else
             {
-                TempData["ToastMessage"] = "Bir hata oluştu.";
+                TempData["ToastMessage"] = "Silme işlemi başarısız.";
                 TempData["IsError"] = true;
             }
-             return RedirectToAction("GetDepartments", "Department");
+            return RedirectToAction("GetDepartments", "Department");
 
         }
         public async Task<ActionResult> UpdateDepartment(UpdateDepartmentCommand updateDepartmentCommand)

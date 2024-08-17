@@ -89,27 +89,39 @@
             <div class="content p-3">
                 <div class="container-fluid">
                         @RenderBody()
-                   
-                        
-                      @*   <div id="myToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">
-                        <div class="toast-header">
-                            <strong class="me-auto">İşlem Durumu</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                        <div class="toast-body">
-                            @ViewBag.ToastMessage
-                        </div>
-                    </div> *@
+    
+                    @if (TempData["ToastMessage"] != null)
+                    {
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                var toastEl = document.getElementById('myToast');
+                                var toast = new bootstrap.Toast(toastEl);
+                                toast.show();
+                            });
+                        </script>
 
-                    <div id="myToast" class="toast hide @(ViewBag.IsError == true ? "error" : "success")" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">
-                        <div class="toast-header">
-                            <strong class="me-auto">İşlem Durumu</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        <div id="myToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                            <div class="toast-header">
+                                <strong class="me-auto">İşlem Durumu</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                @TempData["ToastMessage"]
+                            </div>
                         </div>
-                        <div class="toast-body">
-                            @TempData["ToastMessage"]
-                        </div>
-                    </div>
+
+                        <style>
+                            #myToast {
+                                position: fixed;
+                                bottom: 20px;
+                                right: 20px;
+                                z-index: 9999;
+                                color: white;
+                                background-color: @(TempData["IsError"] != null && (bool)TempData["IsError"] ? "#dc3545" : "#89bf04");
+                            }
+                        </style>
+                    }
+
 
 
                 </div>
@@ -122,35 +134,6 @@
            
 </div>
     </div>
-    <style>
-        #myToast {
-            position: fixed;
-            bottom: 20px; /* Alt kenardan 20px yukarıda */
-            right: 20px; /* Sağ kenardan 20px içerde */
-            z-index: 9999; /* Diğer içeriklerin üzerinde görünsün */
-            color: black; /* Metin rengi beyaz */
-        }
-
-            #myToast.success {
-                background-color: #89bf04; /* Başarılı işlem için yeşil */
-            }
-
-            #myToast.error {
-                background-color: #dc3545; /* Hata için kırmızı */
-            }
-    </style>
-
-    @if (TempData["ToastMessage"] != null)
-    {
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                var toastEl = document.getElementById('myToast');
-                var toast = new bootstrap.Toast(toastEl);
-                toast.show();
-            });
-        </script>
-    }
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
