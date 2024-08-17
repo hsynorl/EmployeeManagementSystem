@@ -1,0 +1,83 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Common.ViewModel.DepartmentViewModel>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class=" d-flex justify-content-between align-items-center py-2">
+            <div class="page-title">Departmanlar</div>
+            <div class="page-title-right">
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("NewDepartment", "Department")'">Departman Ekle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-start">
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td class="text-end"> 
+                                        <a href="@Url.Action("DepartmentDetail","Department",item)"class="btn btn-sm text-secondary">
+                                            <i class="fa fa-edit"></i> 
+                                        </a>
+                                        <a class="text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                            <i class="fa fa-trash" ></i> 
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <span>Department bulunamadı</span>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-3 shadow">
+            <div class="modal-body p-4 text-center">
+                <h5 class="mb-0">Enable this setting?</h5>
+                <p class="mb-0">You can always change your mind in your account settings.</p>
+            </div>
+            <div class="modal-footer flex-nowrap p-0">
+                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Yes, enable</strong></button>
+                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">No thanks</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

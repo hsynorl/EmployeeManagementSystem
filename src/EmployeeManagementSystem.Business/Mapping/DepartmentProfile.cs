@@ -9,7 +9,9 @@ namespace EmployeeManagementSystem.Business.Mapping
     {
         public DepartmentProfile()
         {
-            CreateMap<Department, DepartmentViewModel>().ReverseMap();
+            CreateMap<Department, DepartmentViewModel>()
+                .ForMember(p => p.DepartmentId, y => y.MapFrom(z => z.Id))
+                .ReverseMap();
             CreateMap<Department, CreateDepartmentCommand>().ReverseMap();
             CreateMap<Department, UpdateDepartmentCommand>()
                 .ForMember(p=>p.DepartmentId,y=>y.MapFrom(z=>z.Id))

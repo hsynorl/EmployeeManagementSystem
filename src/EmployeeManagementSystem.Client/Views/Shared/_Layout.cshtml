@@ -6,10 +6,15 @@
     <title>@ViewData["Title"] - EmployeeManagementSystem.Client</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="~/css/sidebars.css" rel="stylesheet">
+    <link href="~/css/modals.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="~/EmployeeManagementSystem.Client.styles.css" asp-append-version="true" />
+  
 </head>
-<body>
-    <header>
+<body >
+   @*  <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EmployeeManagementSystem.Client</a>
@@ -20,27 +25,79 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="GetDepartments">Get Departments</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    </header> *@
+
+    <div class="wrapper" >
+
+        <div class=" left-side-menu">
+            <div class="h-100 d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
+                    <span class="fs-4">Sidebar</span>
+                </a>
+                <hr>
+
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Department" asp-action="GetDepartments">
+                            <svg class="bi me-2" width="16" height="16"></svg>
+                            Departmanlar
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="GetUsers">
+                            <svg class="bi me-2" width="16" height="16"></svg>
+                            Kullanıcılar
+                        </a>
+                    </li>  
+                </ul>
+                <hr>
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="" alt="" width="32" height="32" class="rounded-circle me-2">
+                        <strong>ho</strong>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                        <li><a class="dropdown-item" href="#">Profil</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Çıkış Yap</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="content-page">
+
+            <div class="content p-3">
+                <div class="container-fluid">
+                        @RenderBody()
+                </div>
+            </div> 
+
+            <footer> 
+
+
+            </footer>
+           
+</div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - EmployeeManagementSystem.Client - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+
+
+   
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

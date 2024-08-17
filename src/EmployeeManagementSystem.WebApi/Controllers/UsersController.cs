@@ -1,5 +1,6 @@
 ﻿using EmployeeManagementSystem.Business.Services.Abstract;
 using EmployeeManagementSystem.Common.Command;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,15 @@ namespace EmployeeManagementSystem.WebApi.Controllers
         public async Task<IActionResult> CreateUser(CreateUserCommand createUserCommand)
         {
             var result = await userService.CreateUser(createUserCommand);
+            return Ok(result);
+
+        }
+
+        [HttpPost("login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginCommand loginCommand)
+        {
+            var result = await userService.Login(loginCommand);
             return Ok(result);
 
         }

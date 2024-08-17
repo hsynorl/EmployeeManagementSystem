@@ -1,7 +1,10 @@
 ﻿using EmployeeManagementSystem.Client.Services.Abstract;
 using EmployeeManagementSystem.Common.Command;
 using EmployeeManagementSystem.Common.ViewModel;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace EmployeeManagementSystem.Client.Controllers
 {
@@ -58,5 +61,51 @@ namespace EmployeeManagementSystem.Client.Controllers
            return View();
 
         }
+        public async Task<ActionResult> Login()
+        {
+            return View();
+
+        }
+        public async Task<IActionResult> Logout()
+        {
+            // Kullanıcının mevcut session'undan çıkış yap
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Kullanıcıyı başlangıç sayfasına yönlendir
+            return RedirectToAction("Login", "User");
+        }
+        public async Task<IActionResult> Submit(LoginCommand loginCommand)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await userService.Login(loginCommand);
+                if (result is null)
+                {
+                    return RedirectToAction("Login");
+                }
+                var claims = new List<Claim>
+        {
+            
+            new Claim("Token", result.Result.Token) // Token'ı bir claim olarak ekliyoruz
+        };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var authProperties = new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = result.Result.TokenExpire 
+                };
+
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity),
+                    authProperties);
+
+
+                return RedirectToAction("GetDepartments", "Department");
+            }
+            return RedirectToAction("Login");
+        }
+
     }
 }

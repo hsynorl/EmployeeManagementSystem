@@ -1,22 +1,87 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #fafbfe;
+    color: #6d767e;
 }
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+
+.left-side-menu {
+    position: fixed;
+    height: 100%;
+}
+
+.wrapper {
+    height: 100%;
+    width: 100%;
+}
+
+.content-page {
+    position: relative;
+    margin-left: 280px;
+}
+
+.page-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.card {
+    box-shadow: 0px 0px 35px 0px rgba(154, 161, 171, 0.15) !important;
+    border: none !important;
+}
+
+.table {
+    color: #6c757d !important;
+}
+
+.btn-primary {
+    background-color: #727cf5 !important;
+    box-shadow: 0px 2px 6px 0px rgba(114, 124, 245,5) !important;
+    border-color: #727cf5 !important;
+}
+
+
+    .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
+        color: #fff !important;
+        background-color: #6973e3 !important;
+        border-color: #6973e3 !important;
+    }
+
+.btn-link {
+    color: #727cf5 !important;
+}
+
+

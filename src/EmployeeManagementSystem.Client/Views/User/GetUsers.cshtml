@@ -4,8 +4,6 @@
     ViewData["Title"] = "View";
 }
 
-<h1>View</h1>
-
 <p>
     <a asp-action="NewUser">Create New</a>
 </p>
@@ -32,9 +30,13 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "UserDetail",item) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+                    <a href="@Url.Action("UserDetail","User",item)" class="btn btn-info text-white">
+                        <i class="fa fa-edit"></i> Edit
+                    </a>
+                    <a href="@Url.Action("Delete")" class="btn btn-danger">
+                        <i class="fa fa-trash"></i> Delete
+                    </a>
+                </td>
         </tr>
 }
     </tbody>

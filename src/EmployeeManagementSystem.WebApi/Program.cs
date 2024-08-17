@@ -1,5 +1,6 @@
 using EmployeeManagementSystem.Business.Extentions;
 using EmployeeManagementSystem.DataAccess.Extentions;
+using EmployeeManagementSystem.WebApi.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddBusinessService();
 builder.Services.AddDataAccessService(builder.Configuration);
 
+builder.Services.ConfigureAuthentication(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
