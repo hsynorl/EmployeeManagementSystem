@@ -22,6 +22,7 @@ namespace EmployeeManagementSystem.Client.Controllers
             var result = await departmentService.GetDepartments();
             if (result != null)
             {
+              
                 return View(result.Result);
 
             }
@@ -37,9 +38,13 @@ namespace EmployeeManagementSystem.Client.Controllers
             var result = await departmentService.CreateDepartment(createDepartmentCommand);
             if (result != null)
             {
+                ViewBag.ToastMessage = result.Message;
+                ViewBag.IsError = false;
                 return RedirectToAction("GetDepartments", "Department");
 
             }
+            ViewBag.ToastMessage = result.Message;
+            ViewBag.IsError = true;
             return RedirectToAction("GetDepartments", "Department");
 
         }
@@ -50,10 +55,15 @@ namespace EmployeeManagementSystem.Client.Controllers
             var result = await departmentService.DeleteDepartment(departmentId);
             if (result != null)
             {
-                return RedirectToAction("GetDepartments", "Department");
-
+                TempData["ToastMessage"] = result.Message;
+                TempData["IsError"] = false;
             }
-            return RedirectToAction("GetDepartments", "Department");
+            else
+            {
+                TempData["ToastMessage"] = "Bir hata oluştu.";
+                TempData["IsError"] = true;
+            }
+             return RedirectToAction("GetDepartments", "Department");
 
         }
         public async Task<ActionResult> UpdateDepartment(UpdateDepartmentCommand updateDepartmentCommand)
@@ -61,12 +71,17 @@ namespace EmployeeManagementSystem.Client.Controllers
             var result = await departmentService.UpdateDepartment(updateDepartmentCommand);
             if (result != null)
             {
-                return RedirectToAction("GetDepartments", "Department");
-
+                TempData["ToastMessage"] = result.Message;
+                TempData["IsError"] = false;
+            }
+            else
+            {
+                TempData["ToastMessage"] = "Güncelleme işlemi başarısız.";
+                TempData["IsError"] = true;
             }
             return RedirectToAction("GetDepartments", "Department");
-
         }
+
         public async Task<ActionResult> NewDepartment()
         {
             return View();
