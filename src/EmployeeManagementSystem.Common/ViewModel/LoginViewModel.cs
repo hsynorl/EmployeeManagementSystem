@@ -8,6 +8,7 @@ namespace EmployeeManagementSystem.Common.ViewModel
 {
     public class LoginViewModel
     {
-         
+        public string Token { get; set; }
+
     }
 }

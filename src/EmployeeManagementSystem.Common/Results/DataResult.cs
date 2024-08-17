@@ -1,4 +1,6 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace EmployeeManagementSystem.Common.Results
 {
     public class DataResult<T> : Result, IDataResult<T>
@@ -11,6 +13,6 @@ namespace EmployeeManagementSystem.Common.Results
         {
             Result = result;
         }
-        public T Result { get; }
+        public T Result { get; set; }
     }
 }

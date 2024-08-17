@@ -6,7 +6,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
-      - "80"
+      - "8083:80" 
     networks:
       - net_employeemanagementsystem
 
@@ -24,10 +24,19 @@ services:
     networks:
       - net_employeemanagementsystem  
 
+  employeemanagementsystem.client:
+    container_name: client
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8080:80" 
+    networks:
+      - net_employeemanagementsystem
 networks:
   net_employeemanagementsystem:
     driver: bridge
     external: true
 volumes:
   sql-server-volume:
+
 

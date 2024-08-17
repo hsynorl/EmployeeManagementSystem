@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: src/EmployeeManagementSystem.WebApi/Dockerfile
+
+  employeemanagementsystem.client:
+    image: ${DOCKER_REGISTRY-}employeemanagementsystemclient
+    build:
+      context: .
+      dockerfile: src/EmployeeManagementSystem.Client/Dockerfile
+
