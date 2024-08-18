@@ -4,31 +4,26 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add(new HttpResponseExceptionFilter());
 });
 builder.Services.AddHttpContextAccessor();
 
-// TokenHandler'ýn eklenmesi
 builder.Services.AddTransient<TokenHandler>();
 
-// IUserService için HttpClient'ý yapýlandýrýn ve BaseAddress ekleyin
 builder.Services.AddHttpClient<IUserService, UserService>(client =>
 {
     client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl"));
 })
 .AddHttpMessageHandler<TokenHandler>();
 
-// IDepartmentService için HttpClient'ý yapýlandýrýn ve BaseAddress ekleyin
 builder.Services.AddHttpClient<IDepartmentService, DepartmentService>(client =>
 {
     client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl"));
 })
 .AddHttpMessageHandler<TokenHandler>();
 
-// IUserDepartmentService için HttpClient'ý yapýlandýrýn ve BaseAddress ekleyin
 builder.Services.AddHttpClient<IUserDepartmentService, UserDepartmentService>(client =>
 {
     client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl"));
@@ -37,13 +32,11 @@ builder.Services.AddHttpClient<IUserDepartmentService, UserDepartmentService>(cl
 
 
 
-// WebApiUrl için HttpClient tanýmlamasý
 builder.Services.AddHttpClient("WebApiUrl", client =>
 {
     client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl"));
 });
 
-// Scoped olarak WebApiUrl HttpClient'ýný saðlamak için yapýlandýrma
 builder.Services.AddScoped(sp =>
 {
     var clientFactory = sp.GetRequiredService<IHttpClientFactory>();
@@ -51,7 +44,6 @@ builder.Services.AddScoped(sp =>
 });
 
 
-// Authentication ayarlarý
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -59,7 +51,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
