@@ -1,11 +1,13 @@
 ﻿using EmployeeManagementSystem.Client.Services.Abstract;
 using EmployeeManagementSystem.Common.Command;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Drawing;
 
 namespace EmployeeManagementSystem.Client.Controllers
 {
+    [Authorize]
     public class UserDepartmentController : Controller
     {
         private readonly ILogger<UserDepartmentController> _logger;

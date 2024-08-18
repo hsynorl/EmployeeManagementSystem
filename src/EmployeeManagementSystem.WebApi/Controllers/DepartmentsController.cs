@@ -1,11 +1,14 @@
 ﻿using EmployeeManagementSystem.Business.Services.Abstract;
 using EmployeeManagementSystem.Common.Command;
+using EmployeeManagementSystem.Common.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagementSystem.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = nameof(UserType.Admin))]
     public class DepartmentsController : ControllerBase
     {
        private readonly IDepartmentService departmentsService;

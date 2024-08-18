@@ -5,9 +5,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EmployeeManagementSystem.Client.Controllers
 {
+    [Authorize]
+
     public class UserController : Controller
     {
         private readonly ILogger<UserController> _logger;
@@ -72,6 +75,7 @@ namespace EmployeeManagementSystem.Client.Controllers
            return View();
 
         }
+        [AllowAnonymous]
         public async Task<ActionResult> Login()
         {
             return View();
@@ -101,6 +105,8 @@ namespace EmployeeManagementSystem.Client.Controllers
             // Kullanıcıyı başlangıç sayfasına yönlendir
             return RedirectToAction("Login", "User");
         }
+        [AllowAnonymous]
+
         public async Task<IActionResult> Submit(LoginCommand loginCommand)
         {
             if (ModelState.IsValid)
