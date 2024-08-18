@@ -29,13 +29,13 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                 <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th></th>
+                                <th>
+                                    Adı
+                                </th>
+                                <th>
+                                    Soyadı
+                                </th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,7 +56,7 @@
                                         </a>
                                         <a class="text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" data-userid="@item.UserId">
 
-                                           <i class="fa fa-trash"></i>
+                                            <i class="fa fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -85,12 +85,12 @@
                 <h5 class="mb-0">Kullanıcı silinsin mi?</h5>
                 <p class="mb-0">Seçilen kullanıcıyı silmek istediğinize emin misiniz?</p>
             </div>
-            <div class="modal-footer flex-nowrap p-0"> 
-                    <form method="post" action="DeleteUser" class="d-flex w-100" id="deleteForm">
-                        <input type="hidden" id="deleteUserId" name="userId" />
-                        <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Sil</strong></button>
-                        <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">İptal Et</button>
-                    </form>
+            <div class="modal-footer flex-nowrap p-0">
+                <form method="post" action="DeleteUser" class="d-flex w-100" id="deleteForm">
+                    <input type="hidden" id="deleteUserId" name="userId" />
+                    <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Sil</strong></button>
+                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">İptal Et</button>
+                </form>
             </div>
         </div>
     </div>
