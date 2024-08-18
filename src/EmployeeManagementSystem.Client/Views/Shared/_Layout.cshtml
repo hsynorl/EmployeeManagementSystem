@@ -62,9 +62,9 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link text-white" asp-area="" asp-controller="UserDepartment" asp-action="NewUserDepartment">
+                        <a class="nav-link text-white" asp-area="" asp-controller="UserDepartment" asp-action="GetUserDepartments">
                             <svg class="bi me-2" width="16" height="16"></svg>
-                            Departmana Kullanıcı Ekle
+                            Kullanıcılar Departmanları
                         </a>
                     </li>
                 </ul>
@@ -89,37 +89,7 @@
                 <div class="container-fluid">
                         @RenderBody()
     
-                    @if (TempData["ToastMessage"] != null)
-                    {
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function () {
-                                var toastEl = document.getElementById('myToast');
-                                var toast = new bootstrap.Toast(toastEl);
-                                toast.show();
-                            });
-                        </script>
-
-                        <div id="myToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="50000">
-                            <div class="toast-header">
-                                <strong class="me-auto">İşlem Durumu</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                            </div>
-                            <div class="toast-body">
-                                @TempData["ToastMessage"]
-                            </div>
-                        </div>
-
-                        <style>
-                            #myToast {
-                                position: fixed;
-                                bottom: 20px;
-                                right: 20px;
-                                z-index: 9999;
-                                color: white;
-                                background-color: @(TempData["IsError"] != null && (bool)TempData["IsError"] ? "#e75573" : "#09bf8c");
-                            }
-                        </style>
-                    }
+                
 
 
 

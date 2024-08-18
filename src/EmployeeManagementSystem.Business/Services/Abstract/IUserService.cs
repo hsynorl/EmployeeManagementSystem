@@ -12,5 +12,6 @@ namespace EmployeeManagementSystem.Business.Services.Abstract
         Task<IResult> UpdateUser(UpdateUserCommand updateUserCommand);
         Task<IResult> DeleteUser(DeleteUserCommand deleteUserCommand);
         Task<IDataResult<List<UserViewModel>>> GetUsers();
+        Task<IDataResult<List<UserViewModel>>> GetUsersWithOutDepartment();
     }
 }

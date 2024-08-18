@@ -11,5 +11,7 @@ namespace EmployeeManagementSystem.Client.Services.Abstract
         Task<Common.Results.IResult> UpdateUser(UpdateUserCommand updateUserCommand);
         Task<Common.Results.IResult> DeleteUser(Guid userId);
         Task<IDataResult<List<UserViewModel>>> GetUsers();
+        Task<IDataResult<List<UserViewModel>>> GetUsersWithOutDepartment();
+
     }
 }

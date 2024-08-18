@@ -61,19 +61,20 @@ namespace EmployeeManagementSystem.Business.Services.Concrete
             return new SuccessDataResult<DepartmentViewModel>(department);
         }
 
-        public async Task<IDataResult<List<UserViewModel>>> GetDepartmentUsers(GetDepartmentUsersQuery getDepartmentUsersQuery)
+        public async Task<IDataResult<List<UserDepartmentsViewModel>>> GetDepartmentUsers()
         {
             var result = await userDepartmentRepository.AsQueryable()
                 .Include(p => p.User)
+                .Include(p => p.Department)
                 .Where(_ => true)
                 .AsNoTracking()
                 .ToListAsync();
             if (result.Count < 1)
             {
-                return new ErrorDataResult<List<UserViewModel>>("User bulunamadı");
+                return new ErrorDataResult<List<UserDepartmentsViewModel>>("User bulunamadı");
             }
-            var users = mapper.Map<List<UserViewModel>>(result.Select(p=>p.User));
-            return new SuccessDataResult<List<UserViewModel>>(users);
+            var usersdepartments = mapper.Map<List<UserDepartmentsViewModel>>(result);
+            return new SuccessDataResult<List<UserDepartmentsViewModel>>(usersdepartments);
         }
 
         public async Task<IResult> UpdateUserDepartment(UpdateUserDepartmentCommand updateUserDepartmentCommand)

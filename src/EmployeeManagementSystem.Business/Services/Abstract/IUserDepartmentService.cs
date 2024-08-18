@@ -10,7 +10,7 @@ namespace EmployeeManagementSystem.Business.Services.Abstract
         Task<IResult> CreateUserDepartment(CreateUserDepartmentCommand createUserDepartmentCommand);
         Task<IResult> UpdateUserDepartment(UpdateUserDepartmentCommand updateUserDepartmentCommand);
         Task<IResult> DeleteUserDepartment(DeleteUserDepartmentCommand deleteUserDepartmentCommand);
-        Task<IDataResult<List<UserViewModel>>> GetDepartmentUsers(GetDepartmentUsersQuery getDepartmentUsersQuery);
+        Task<IDataResult<List<UserDepartmentsViewModel>>> GetDepartmentUsers();
         Task<IDataResult<DepartmentViewModel>> GetUserDepartmentByUserId(GetUserDepartmentQuery getUserDepartmentQuery);
 
     }

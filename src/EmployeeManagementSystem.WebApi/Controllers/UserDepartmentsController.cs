@@ -21,12 +21,9 @@ namespace EmployeeManagementSystem.WebApi.Controllers
         }
 
         [HttpGet("get-department-users")]
-        public async Task<IActionResult> GetDepartmentUsers([FromQuery]Guid departmentId)
+        public async Task<IActionResult> GetDepartmentUsers()
         {
-            var result = await userDepartmentService.GetDepartmentUsers(new()
-            {
-                DepartmentId = departmentId
-            });
+            var result = await userDepartmentService.GetDepartmentUsers();
             return Ok(result);
         }
         [HttpGet("get-departments-by-user-id")]

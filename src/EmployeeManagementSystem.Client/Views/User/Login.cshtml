@@ -17,7 +17,7 @@
 
             @using (Html.BeginForm("Submit", "User"))
             {
-                <div class="form-floating">
+                <div class="form-floating mb-1">
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control" , @placeholder="name@example.com" ,@id="floatingInput" ,@type="email" })
                     <label for="floatingInput">Mail Adres</label>
                 </div>

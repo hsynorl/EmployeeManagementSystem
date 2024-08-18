@@ -55,6 +55,12 @@ namespace EmployeeManagementSystem.Client.Services.Concrete
             
         }
 
+        public async Task<IDataResult<List<UserViewModel>>> GetUsersWithOutDepartment()
+        {
+            var response = await httpClient.GetFromJsonAsync<DataResult<List<UserViewModel>>>("Users/get-users-without-department");
+            return response;
+        }
+
         public async Task<IDataResult<LoginViewModel>> Login(LoginCommand loginCommand)
         {
             var response = await httpClient.PostAsJsonAsync("Users/login", loginCommand);

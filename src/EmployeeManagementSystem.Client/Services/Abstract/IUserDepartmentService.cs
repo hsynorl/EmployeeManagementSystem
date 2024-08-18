@@ -9,8 +9,8 @@ namespace EmployeeManagementSystem.Client.Services.Abstract
     {
         Task<Common.Results.IResult> CreateUserDepartment(CreateUserDepartmentCommand createUserDepartmentCommand);
         Task<Common.Results.IResult> UpdateUserDepartment(UpdateUserDepartmentCommand updateUserDepartmentCommand);
-        Task<Common.Results.IResult> DeleteUserDepartment(DeleteUserDepartmentCommand deleteUserDepartmentCommand);
-        Task<IDataResult<List<UserViewModel>>> GetDepartmentUsers(GetDepartmentUsersQuery getDepartmentUsersQuery);
+        Task<Common.Results.IResult> DeleteUserDepartment(Guid userId);
+        Task<IDataResult<List<UserDepartmentsViewModel>>> GetDepartmentUsers();
         Task<IDataResult<DepartmentViewModel>> GetUserDepartmentByUserId(GetUserDepartmentQuery getUserDepartmentQuery);
 
     }

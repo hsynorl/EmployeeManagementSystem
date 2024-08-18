@@ -114,6 +114,8 @@ namespace EmployeeManagementSystem.Client.Controllers
                 var result = await userService.Login(loginCommand);
                 if (result is null)
                 {
+                    TempData["ToastMessage"] = "Girilen bilgileri kontrol ediniz";
+                    TempData["IsError"] = true;
                     return RedirectToAction("Login");
                 }
                 var claims = new List<Claim>

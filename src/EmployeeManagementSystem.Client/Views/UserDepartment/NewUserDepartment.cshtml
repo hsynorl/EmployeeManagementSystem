@@ -9,7 +9,7 @@
     <div class="col-lg-12 col-md-6">
         <div class="card">
             <div class="card-body">
-                @if (ViewBag.Departments.Count > 0 && ViewBag.Users.Count > 0)
+                @if (ViewBag.Users != null && ViewBag.Departments != null && ViewBag.Users.Count > 0 && ViewBag.Departments.Count > 0)
                 {
                     <form asp-action="CreateUserDepartment">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>

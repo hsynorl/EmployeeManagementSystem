@@ -1,0 +1,47 @@
+﻿@model EmployeeManagementSystem.Common.ViewModel.UserDepartmentsViewModel
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<div class="page-title">Kullanıcı Departmanı Güncelle</div>
+<hr />
+<div class="row">
+    <div class="col-lg-12 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="UpdateUserDepartment" ,asp-controller="UserDepartment">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="UserId" type="hidden" />
+
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DepartmentId" class="control-label">Departman Adı</label>
+                        <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.Departments"></select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-2 d-flex justify-content-between">
+                        <input type="submit" value="Kullanıcının Departmanını Güncelle" class="btn btn-primary" />      
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

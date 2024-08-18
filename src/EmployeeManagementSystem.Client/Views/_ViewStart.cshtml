@@ -14,3 +14,34 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+@if (TempData["ToastMessage"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var toastEl = document.getElementById('myToast');
+            var toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        });
+    </script>
+
+    <div id="myToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="50000">
+        <div class="toast-header">
+            <strong class="me-auto">İşlem Durumu</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["ToastMessage"]
+        </div>
+    </div>
+
+    <style>
+        #myToast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            color: white;
+            background-color: @(TempData["IsError"] != null && (bool)TempData["IsError"] ? "#e75573" : "#09bf8c");
+        }
+    </style>
+}

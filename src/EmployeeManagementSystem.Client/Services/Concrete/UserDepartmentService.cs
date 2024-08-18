@@ -31,14 +31,26 @@ namespace EmployeeManagementSystem.Client.Services.Concrete
             return null;
         }
 
-        public Task<Common.Results.IResult> DeleteUserDepartment(DeleteUserDepartmentCommand deleteUserDepartmentCommand)
+        public async Task<Common.Results.IResult> DeleteUserDepartment(Guid userId)
         {
-            throw new NotImplementedException();
+            var response = await httpClient.DeleteAsync($"userdepartments/delete-userdepartment?userId={userId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var deleteResponse = await response.Content.ReadFromJsonAsync<Common.Results.Result>();
+
+                if (deleteResponse.Success)
+                {
+                    return deleteResponse;
+                }
+            }
+            return null;
         }
 
-        public Task<IDataResult<List<UserViewModel>>> GetDepartmentUsers(GetDepartmentUsersQuery getDepartmentUsersQuery)
+        public async Task<IDataResult<List<UserDepartmentsViewModel>>> GetDepartmentUsers()
         {
-            throw new NotImplementedException();
+            var response = await httpClient.GetFromJsonAsync<DataResult<List<UserDepartmentsViewModel>>>("UserDepartments/get-department-users");
+            return response;
         }
 
         public Task<IDataResult<DepartmentViewModel>> GetUserDepartmentByUserId(GetUserDepartmentQuery getUserDepartmentQuery)
@@ -46,9 +58,20 @@ namespace EmployeeManagementSystem.Client.Services.Concrete
             throw new NotImplementedException();
         }
 
-        public Task<Common.Results.IResult> UpdateUserDepartment(UpdateUserDepartmentCommand updateUserDepartmentCommand)
+        public async Task<Common.Results.IResult> UpdateUserDepartment(UpdateUserDepartmentCommand updateUserDepartmentCommand)
         {
-            throw new NotImplementedException();
+            var response = await httpClient.PutAsJsonAsync("UserDepartments/update-userdepartment", updateUserDepartmentCommand);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var updateResponse = await response.Content.ReadFromJsonAsync<Common.Results.Result>();
+
+                if (updateResponse.Success)
+                {
+                    return updateResponse;
+                }
+            }
+            return null;
         }
     }
 }

@@ -145,5 +145,16 @@ namespace EmployeeManagementSystem.Business.Services.Concrete
             }
             return new ErrorResult("Kullanıcı güncellenemedi");
         }
+
+        public async Task<IDataResult<List<UserViewModel>>> GetUsersWithOutDepartment()
+        {
+            var result = await userRepository.GetList(p => p.UserType == UserType.User && p.UserDepartment==null);
+            if (result.Count < 1)
+            {
+                return new ErrorDataResult<List<UserViewModel>>("Kullanıcı bulunamadı");
+            }
+            var users = mapper.Map<List<UserViewModel>>(result);
+            return new SuccessDataResult<List<UserViewModel>>(users);
+        }
     }
 }

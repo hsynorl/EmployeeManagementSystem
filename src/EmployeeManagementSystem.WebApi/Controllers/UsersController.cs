@@ -60,5 +60,11 @@ namespace EmployeeManagementSystem.WebApi.Controllers
             var result=await userService.GetUsers();        
             return Ok(result);  
         }
+        [HttpGet("get-users-without-department")]
+        public async Task<IActionResult> GetUsersWithOutDepartment()
+        {
+            var result = await userService.GetUsersWithOutDepartment();
+            return Ok(result);
+        }
     }
 }
