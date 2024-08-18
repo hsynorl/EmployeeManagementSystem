@@ -5,7 +5,33 @@
     Layout = null;
 }
 
-<div class="container">
+
+
+
+
+<div class="login-form">
+    <div class="form-signin text-center">
+       
+            <img class="mb-4" src="~/img/logo.svg" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Lütfen giriş yapınız</h1>
+
+            @using (Html.BeginForm("Submit", "User"))
+            {
+                <div class="form-floating">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" , @placeholder="name@example.com" ,@id="floatingInput" ,@type="email" })
+                    <label for="floatingInput">Mail Adres</label>
+                </div>
+                <div class="form-floating">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" ,@id="floatingPassword" ,@placeholder="Password" })
+                    <label for="floatingPassword">Şifre</label>
+                </div>            
+              <button class="w-100 btn btn-lg btn-primary" type="submit">Giriş</button>
+            }
+     
+    </div>
+</div>
+
+@* <div class="container">
 
     <div class="mt-5">
         <div class="d-flex justify-content-center">
@@ -27,6 +53,5 @@
             </div>
         </div>
     </div>
-</div>
-
-
+</div> 
+ *@

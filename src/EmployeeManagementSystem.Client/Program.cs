@@ -12,36 +12,50 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddTransient<TokenHandler>();
 
-builder.Services.AddHttpClient<IUserService, UserService>(client =>
-{
-    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl"));
-})
-.AddHttpMessageHandler<TokenHandler>();
-
-builder.Services.AddHttpClient<IDepartmentService, DepartmentService>(client =>
-{
-    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl"));
-})
-.AddHttpMessageHandler<TokenHandler>();
-
-builder.Services.AddHttpClient<IUserDepartmentService, UserDepartmentService>(client =>
-{
-    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl"));
-})
-.AddHttpMessageHandler<TokenHandler>();
-
-
 
 builder.Services.AddHttpClient("WebApiUrl", client =>
 {
     client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl"));
-});
+})
+.AddHttpMessageHandler<TokenHandler>();
 
 builder.Services.AddScoped(sp =>
 {
     var clientFactory = sp.GetRequiredService<IHttpClientFactory>();
     return clientFactory.CreateClient("WebApiUrl");
 });
+
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+builder.Services.AddScoped<IUserDepartmentService,UserDepartmentService>();
+
+
+//builder.Services.AddHttpClient<IUserService, UserService>(client =>
+//{
+//    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl"));
+//})
+//.AddHttpMessageHandler<TokenHandler>();
+
+//builder.Services.AddHttpClient<IDepartmentService, DepartmentService>(client =>
+//{
+//    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl"));
+//})
+//.AddHttpMessageHandler<TokenHandler>();
+
+//builder.Services.AddHttpClient<IUserDepartmentService, UserDepartmentService>(client =>
+//{
+//    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl"));
+//})
+//.AddHttpMessageHandler<TokenHandler>();
+
+
+//builder.Services.AddHttpClient("WebApiUrl", client =>
+//{
+//    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl"));
+//});
+
+
 
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

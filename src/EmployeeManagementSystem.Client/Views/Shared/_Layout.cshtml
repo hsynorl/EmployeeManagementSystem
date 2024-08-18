@@ -44,7 +44,7 @@
             <div class="h-100 d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
-                    <span class="fs-4">Sidebar</span>
+                    <span class="fs-4">Kullanıcı Yönetim Sistemi</span>
                 </a>
                 <hr>
 
@@ -69,23 +69,16 @@
                     </li>
                 </ul>
                 <hr>
-                <div class="dropdown">
 
-                    <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Logout">
+             
+
+                <div class="dropdown">
+                   <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Logout">
                         <svg class="bi me-2" width="16" height="16"></svg>
                         Çıkış Yap
-                    </a>
-                  @*
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong>ho</strong>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" href="#">Profil</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#"></a></li>
-                    </ul> *@
-                </div>
+                    </a> 
+
+                </div> 
             </div>
 
         </div>
@@ -106,7 +99,7 @@
                             });
                         </script>
 
-                        <div id="myToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                        <div id="myToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="50000">
                             <div class="toast-header">
                                 <strong class="me-auto">İşlem Durumu</strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -123,7 +116,7 @@
                                 right: 20px;
                                 z-index: 9999;
                                 color: white;
-                                background-color: @(TempData["IsError"] != null && (bool)TempData["IsError"] ? "#dc3545" : "#89bf04");
+                                background-color: @(TempData["IsError"] != null && (bool)TempData["IsError"] ? "#e75573" : "#09bf8c");
                             }
                         </style>
                     }
