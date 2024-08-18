@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using System.Reflection;
 
 namespace EmployeeManagementSystem.Client.Controllers
 {
@@ -56,6 +57,11 @@ namespace EmployeeManagementSystem.Client.Controllers
         }
         public async Task<ActionResult> CreateUser(CreateUserCommand createUserCommand)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("NewUser", createUserCommand); // Hatalı verilerle NewUser sayfasını yeniden yükleyin
+
+            }
             var result = await userService.CreateUser(createUserCommand);
             if (result != null)
             {
