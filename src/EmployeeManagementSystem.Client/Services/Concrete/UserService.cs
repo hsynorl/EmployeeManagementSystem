@@ -66,15 +66,6 @@ namespace EmployeeManagementSystem.Client.Services.Concrete
             var response = await httpClient.PostAsJsonAsync("Users/login", loginCommand);
             var loginViewModel = await response.Content.ReadFromJsonAsync<DataResult<LoginViewModel>>();
 
-            //if (response.IsSuccessStatusCode)
-            //{
-
-            //    if (loginViewModel.Success)
-            //    {
-            //        return loginViewModel;
-            //    }
-            //}
-
             return loginViewModel;
         }
 
