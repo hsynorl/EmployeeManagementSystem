@@ -64,17 +64,18 @@ namespace EmployeeManagementSystem.Client.Services.Concrete
         public async Task<IDataResult<LoginViewModel>> Login(LoginCommand loginCommand)
         {
             var response = await httpClient.PostAsJsonAsync("Users/login", loginCommand);
+            var loginViewModel = await response.Content.ReadFromJsonAsync<DataResult<LoginViewModel>>();
 
-            if (response.IsSuccessStatusCode)
-            {
-                var loginViewModel = await response.Content.ReadFromJsonAsync<DataResult<LoginViewModel>>();
+            //if (response.IsSuccessStatusCode)
+            //{
 
-                if (loginViewModel.Success)
-                {
-                    return loginViewModel;
-                }
-            }
-            return null;
+            //    if (loginViewModel.Success)
+            //    {
+            //        return loginViewModel;
+            //    }
+            //}
+
+            return loginViewModel;
         }
 
         public async Task<Common.Results.IResult> UpdateUser(UpdateUserCommand updateUserCommand)

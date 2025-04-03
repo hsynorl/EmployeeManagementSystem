@@ -118,9 +118,9 @@ namespace EmployeeManagementSystem.Client.Controllers
             if (ModelState.IsValid)
             {
                 var result = await userService.Login(loginCommand);
-                if (result is null)
+                if (!result.Success)
                 {
-                    TempData["ToastMessage"] = "Girilen bilgileri kontrol ediniz";
+                    TempData["ToastMessage"] = result.Message ?? "Girilen bilgileri kontrol ediniz!";
                     TempData["IsError"] = true;
                     return RedirectToAction("Login");
                 }
